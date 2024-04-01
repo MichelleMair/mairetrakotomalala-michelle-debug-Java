@@ -1,57 +1,37 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WriteSymptomDataToFile implements ISymptomWriter {
-	String inputFile = "result.out";
-	String outputFile = "listOfSymptoms.txt";
 
 	@Override
-	public void writeSymptoms(Map<String, Integer> counterOfSymptoms) {
-		counterOfSymptoms = new HashMap<>();
+	public void writeSymptoms(ISymptomReader readSymptom) {
 
-		try {
-			// read symptoms file
-			BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-			String line;
+		// Récupération de la liste des symptomes qu'on a lu à partir de la classe
+		// ReadSymptomReader
+		List<String> symptoms = readSymptom.GetSymptoms();
 
-			while ((line = reader.readLine()) != null) {
-				// Diviser la ligne en mots en utilisant la virgule comme délimiteur
-				String[] symptoms = line.split(",");
+		// Création du compteur à partir de la classe qui sert à compter les symptomes
+		CounterSymptom symptomCounter = new CounterSymptom();
+		Map<String, Integer> symptomCountMap = symptomCounter.countSymptoms(symptoms);
 
-				// Parcourir les mots de la ligne et mettre à jour le compteur
-				for (String symptom : symptoms) {
-					counterOfSymptoms.put(symptom, counterOfSymptoms.getOrDefault(symptom, 0) + 1);
-					System.out.println("TEST 2 boucle for    "
-							+ counterOfSymptoms.put(symptom, counterOfSymptoms.getOrDefault(symptom, 0) + 1));
-				}
+		// Ecrire les symptomes et leurs quantités dans le même fichier result.out
+		try (
+				// Création d'un BufferedWriter pour lire depuis le fichier d'entrée
+				BufferedWriter writer = new BufferedWriter(new FileWriter("result.out"))) {
 
+			for (Map.Entry<String, Integer> entry : symptomCountMap.entrySet()) {
+				writer.write(entry.getKey() + " : " + entry.getValue());
+				writer.newLine();
 			}
-			reader.close();
-
-			// write symptoms in the output file
-			FileWriter writer = new FileWriter(outputFile);
-			BufferedWriter bufferedWriter = new BufferedWriter(writer);
-
-			// write results of the map count in the output file
-			for (Map.Entry<String, Integer> entry : counterOfSymptoms.entrySet()) {
-				bufferedWriter.write(entry.getKey() + ": " + entry.getValue());
-				// go to a new line
-				bufferedWriter.newLine();
-			}
-			// Fermeture du BufferedWriter
-			System.out.println("Number of symptoms has been saved in the output file.");
-			bufferedWriter.close();
+			System.out.println("Symptoms and number of them successsfully add to file.");
 		} catch (IOException e) {
 			System.err.println("TEST ERREUR");
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -8,7 +8,8 @@ import java.util.List;
 
 /**
  * ReadSymptomDataFromFile implémente l'interface ISymptomReader Méthode
- * abstraite GetSymptoms() qui permet de récupérer les symptomes
+ * abstraite GetSymptoms() qui lit le fichier d'entrée et qui permet de
+ * récupérer les symptomes
  *
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
@@ -20,6 +21,8 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * @param filepath a full or partial path to file with symptom strings in it,
 	 *                 one per line
 	 */
+
+	// réupération du chemin d'accès au fichier à lire
 	public ReadSymptomDataFromFile(String filepath) {
 		this.filepath = filepath;
 	}
@@ -30,10 +33,13 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 		if (filepath != null) {
 			try {
+				// permet de lirer le fichier input
 				BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
 				String line;
 
+				// tant que le fichier contient des lignes,le résultat de la ligne va être
+				// ajouté au fichier de sortie
 				while ((line = reader.readLine()) != null) {
 					result.add(line);
 					line = reader.readLine();
@@ -44,10 +50,8 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("TEST ERREUR  ");
 			}
 		}
-		System.out.println("RESULTATS: " + result);
 		return result;
 	}
 }

@@ -5,12 +5,15 @@ import java.util.List;
 public class AnalyticsCounter {
 
 	public static void main(String args[]) throws Exception {
-		// Map<String, Integer> countSymptoms = new HashMap<>();
-		WriteSymptomDataToFile writeSymptom = new WriteSymptomDataToFile();
 
-		ReadSymptomDataFromFile readSymptom = new ReadSymptomDataFromFile("symptoms.txt");
+		// Read Data file and provide a list of symptoms
+		ISymptomReader readSymptom = new ReadSymptomDataFromFile("symptoms.txt");
 		List<String> symptoms = readSymptom.GetSymptoms();
-		// writeSymptom.writeSymptoms(countSymptoms);
+
+		// Write number of symptoms from data file
+		ISymptomWriter writeSymptom = new WriteSymptomDataToFile();
+		writeSymptom.writeSymptoms(readSymptom);
+
 	}
 
 }
