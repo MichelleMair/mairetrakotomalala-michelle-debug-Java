@@ -5,32 +5,44 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * AnalyticsCounter class serves as a controller for analyzing symptoms data
+ */
 public class AnalyticsCounter {
 
 	public ISymptomReader reader;
 	public ISymptomWriter writer;
 
-	// Mon constructeur
-	public void AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+	/**
+	 * Constructor
+	 * 
+	 * @param reader
+	 * @param writer
+	 */
+	public void analyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
 	}
 
-	/*
-	 * lecture du fichier d'entrée avec la méthode de la classe de lecture =>
-	 * retourne un tableau ou une liste
+	/**
+	 * Read an input file
+	 * 
+	 * @return a raw listing of all Symptoms obtained from a data source, duplicates
+	 *         are possible/probable
 	 */
-	public List<String> GetSymptoms() {
-		return reader.GetSymptoms();
+	public List<String> getSymptoms() {
+		return reader.getSymptoms();
 	}
 
-	/*
-	 * countSymptoms est une méthode qui récupère le tableau de symptomes, compte
-	 * les occurences des symptomes et retourne un Map
-	 **/
+	/**
+	 * This method count the number of occurrences of each symptom from a list of
+	 * symptoms
+	 * 
+	 * @return a map with symptoms and their count
+	 */
 	public Map<String, Integer> countSymptoms() {
 		Map<String, Integer> symptomCountMap = new HashMap<>();
-		List<String> symptoms = GetSymptoms();
+		List<String> symptoms = getSymptoms();
 
 		for (String symptom : symptoms) {
 			symptomCountMap.put(symptom, symptomCountMap.getOrDefault(symptom, 0) + 1);
@@ -39,18 +51,24 @@ public class AnalyticsCounter {
 		return symptomCountMap;
 	}
 
-	/*
-	 * Méthode qui va trier par ordre alphabétique le Map reçu en entrée Cette
-	 * méthode va se servir des clés donc des symptomes pour faire le tri
+	/**
+	 * This method sorts the Map passed as a parameter by alphabetical order of keys
+	 * (which are symptoms) and returns the sorted Map. It uses a TreeMap to perfom
+	 * the sorting
 	 * 
-	 **/
+	 * @param map
+	 * @return a treeMap
+	 */
 	public Map<String, Integer> sortMapByKey(Map<String, Integer> map) {
 		Map<String, Integer> sortedSymptomCountMap = new TreeMap<>(map);
 		return sortedSymptomCountMap;
 	}
 
-	/*
-	 * Appel de la méthode writeSymptoms pour écrire dans le fichier de sortie
+	/**
+	 * This method writeSymptoms() retrieves the occurrences of each symptom from
+	 * the countSymptoms() method Then sorts these occurrences alphabetically using
+	 * the sortMapByKey() method And finally writes the sorted symptoms and their
+	 * occurrences to an output file (result.out)
 	 */
 	public void writeSymptoms() {
 		Map<String, Integer> symptomCountMap = countSymptoms();
