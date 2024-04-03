@@ -49,6 +49,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				System.out.println("Symptoms were successfully read and imported into file");
 
 			} catch (IOException e) {
+				System.err.println("Error trying to read symptoms from the input file: " + e.getMessage());
 				e.printStackTrace();
 			}
 		}

@@ -1,9 +1,10 @@
 # Project_DA_Java_EN_Come_to_the_Rescue_of_a_Java_Application
 
+HEME BIOTECH 
+
 Cette application est destinée à nos clients médecins comme vétérinaires. 
 Elle permet d'analyser les tendances c'est à dire qu'elle permet de lire un fichier de symptomes en format .txt que fournissent nos clients.  
 Puis de restituer le nombre d'occurences de chaque symptome et de les trier par odre alphabétique. 
-
 
 
 POUR COMMENCER:
