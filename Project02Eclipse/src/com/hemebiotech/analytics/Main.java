@@ -13,16 +13,16 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Instantiation of the interface: ISymptomReader
-		ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
+		ISymptomReader reader = new ReadSymptomDataFromFile("./Project02Eclipse/symptoms.txt");
 
 		// Instantiation of the interface: ISymptomWriter
 		ISymptomWriter writer = new WriteSymptomDataToFile();
 
 		// Instantiation of the class: AnalyticsCounter
-		AnalyticsCounter analyticsCounter = new AnalyticsCounter();
+		AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
 
 		// Launching the reader to read the input file
-		analyticsCounter.analyticsCounter(reader, writer);
+		analyticsCounter.getSymptoms();
 
 		/*
 		 * Launching the writer method to write into the result.out file Which uses the

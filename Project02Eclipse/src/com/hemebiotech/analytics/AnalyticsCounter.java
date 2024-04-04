@@ -19,7 +19,7 @@ public class AnalyticsCounter {
 	 * @param reader
 	 * @param writer
 	 */
-	public void analyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
 		this.reader = reader;
 		this.writer = writer;
 	}
