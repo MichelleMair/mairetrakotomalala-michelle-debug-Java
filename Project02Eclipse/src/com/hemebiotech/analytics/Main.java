@@ -13,7 +13,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Instantiation of the interface: ISymptomReader
-		ISymptomReader reader = new ReadSymptomDataFromFile("./Project02Eclipse/symptoms.txt");
+		ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
 
 		// Instantiation of the interface: ISymptomWriter
 		ISymptomWriter writer = new WriteSymptomDataToFile();
