@@ -10,16 +10,16 @@ import java.util.List;
  * ReadSymptomDataFromFile implements the ISymptomReader abstract method
  * GetSymptoms() which read the input file and get symptoms in this file
  */
-public class ReadSymptomDataFromFile implements ISymptomReader {
+public class SymptomReader implements ISymptomReader {
 
-	private String filepath = "symptoms.txt";
+	private String filepath = "C:/Users/miche/git/mairetrakotomalala-michelle-debug-Java/symptoms.txt";
 
 	/**
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it,
 	 *                 one per line
 	 */
-	public ReadSymptomDataFromFile(String filepath) {
+	public SymptomReader(String filepath) {
 		this.filepath = filepath;
 	}
 

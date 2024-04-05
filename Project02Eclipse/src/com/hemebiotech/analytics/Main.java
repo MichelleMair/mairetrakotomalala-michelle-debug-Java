@@ -13,10 +13,11 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// Instantiation of the interface: ISymptomReader
-		ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
+		ISymptomReader reader = new SymptomReader(
+				"C:/Users/miche/git/mairetrakotomalala-michelle-debug-Java/symptoms.txt");
 
 		// Instantiation of the interface: ISymptomWriter
-		ISymptomWriter writer = new WriteSymptomDataToFile();
+		ISymptomWriter writer = new SymptomWriter();
 
 		// Instantiation of the class: AnalyticsCounter
 		AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);

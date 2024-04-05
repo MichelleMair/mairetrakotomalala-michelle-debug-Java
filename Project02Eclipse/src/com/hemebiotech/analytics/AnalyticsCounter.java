@@ -12,6 +12,7 @@ public class AnalyticsCounter {
 
 	public ISymptomReader reader;
 	public ISymptomWriter writer;
+	private List<String> symptomsList;
 
 	/**
 	 * Constructor
@@ -25,24 +26,27 @@ public class AnalyticsCounter {
 	}
 
 	/**
-	 * Read an input file
+	 * Read an input file and store the list in a variable (symptomsList)
 	 * 
 	 * @return a raw listing of all Symptoms obtained from a data source, duplicates
 	 *         are possible/probable
 	 */
 	public List<String> getSymptoms() {
-		return reader.getSymptoms();
+		if (symptomsList == null) {
+			symptomsList = reader.getSymptoms();
+		}
+		return symptomsList;
 	}
 
 	/**
-	 * This method count the number of occurrences of each symptom from a list of
-	 * symptoms
+	 * This method count the occurrences of each symptom from a list of symptoms
+	 * (using symptomsList) and stores the count in a Map
 	 * 
 	 * @return a map with symptoms and their count
 	 */
 	public Map<String, Integer> countSymptoms() {
 		Map<String, Integer> symptomCountMap = new HashMap<>();
-		List<String> symptoms = getSymptoms();
+		List<String> symptoms = symptomsList;
 
 		for (String symptom : symptoms) {
 			symptomCountMap.put(symptom, symptomCountMap.getOrDefault(symptom, 0) + 1);

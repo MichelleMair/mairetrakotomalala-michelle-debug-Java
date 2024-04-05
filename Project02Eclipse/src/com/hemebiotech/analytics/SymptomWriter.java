@@ -10,7 +10,7 @@ import java.util.Map;
  * defines the method writeSymptoms() for writing symptoms and their occurrences
  * to a file
  */
-public class WriteSymptomDataToFile implements ISymptomWriter {
+public class SymptomWriter implements ISymptomWriter {
 
 	@Override
 	/*
